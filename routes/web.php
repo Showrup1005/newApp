@@ -9,3 +9,6 @@ Route::get('/student/{id}', [StudentController::class, 'homepage']);
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
+Route::get('/studentview', [StudentController::class, 'index']);
