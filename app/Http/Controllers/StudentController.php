@@ -16,5 +16,9 @@ class StudentController extends Controller
 
         return view('studentPage', compact('students'));
     }
+
+    public function read(){
+        return "This is the read controller";
+    }
 }
 
