@@ -71,3 +71,25 @@ This will be printed
     @break($n == 3)
 @endforeach
 
+
+{{-- To apply css classes if certain conditions are met --}}
+<div @class(['my-css-class', 'georgia' => $country === 'ge'])
+    @style([
+        'color:green', 'background-color:cyan' => $country === 'ge'
+    ])>   
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi quia illo voluptates incidunt libero molestias necessitatibus eum delectus maxime soluta! Voluptas necessitatibus illum in mollitia nam perferendis minima quidem expedita!
+</div>
+
+@include('shared.button', ['color' => 'yellow', 'text' => 'submit'])
+
+{{-- doesn't include the file if it doesnt exist also doesnt show any error if file doesnt exist --}}
+@includeIf('view.name', ['some' => 'data'])  
+
+@php
+    $cars = [1, 2, 3, 4, 5];
+@endphp
+
+{{-- iterate over the $cars array and include a specific view for each item. view.empty file is a fallback file
+if cars array is empty --}}
+@each('car.view', $cars, 'car', 'view.empty')
+

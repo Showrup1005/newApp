@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MathController;
@@ -33,6 +34,8 @@ Route::controller(StudentController::class)->group(function() {
     Route::get('/car', 'read'); 
 });
 
+Route::resource('category', CategoryController::class);
+
 Route::get('/showstu', ShowStudentController::class);
 
 // Route::resource('/photo', PhotoController::class)->except(['destroy']);  // to exclude methods from the resource controller
@@ -57,3 +60,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');   // name metho
 
 
 Route::get('/hello', [HelloController::class, 'welcome']);
+
+Route::get('/home1', function(){
+    return view('home');
+});
+
