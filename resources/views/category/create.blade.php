@@ -8,10 +8,6 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    <h4>Add Category</h4>
-                    <a href="{{route('category')}}" class="btn btn-danger float-right">Click me</a>
-                </div>
                 <div class="card-body">
                     <form action="{{route('category.store')}}" method="post">
                         @csrf
