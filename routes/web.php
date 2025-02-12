@@ -73,3 +73,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/admin/welcome', [AdminController::class, 'usercheck'])->middleware('auth', 'admin');
+
+Route::get('/upload', [App\Http\Controllers\HomeController::class, 'uploadIndex'])->name('upload');
+Route::post('/upload', [App\Http\Controllers\HomeController::class, 'storeImage'])->name('image.store');
