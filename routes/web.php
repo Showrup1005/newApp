@@ -7,11 +7,15 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MathController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ShowStudentController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\GoogleController;
 
 
 Route::get('/student/{id}', [StudentController::class, 'homepage']);
@@ -76,3 +80,25 @@ Route::get('/admin/welcome', [AdminController::class, 'usercheck'])->middleware(
 
 Route::get('/upload', [App\Http\Controllers\HomeController::class, 'uploadIndex'])->name('upload');
 Route::post('/upload', [App\Http\Controllers\HomeController::class, 'storeImage'])->name('image.store');
+
+Route::get('fetchQuestion', [QuestionController::class, 'create']);
+Route::get('quiz', [QuestionController::class, 'index']);
+
+Route::get('/pdf', [App\Http\Controllers\PDFController::class, 'index'])->name('pdf.generate');
+Route::get('stripe', [StripeController::class, 'index']);
+Route::post('stripe', [StripeController::class, 'charge'])->name('stripe.charge');
+
+Route::get('send-email', [MailController::class, 'sendEmail']);
+// Route::get('', [MailController::class, 'sendEmail']);
+
+Auth::routes([
+    'verify' => true,
+]);
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware("verified");
+
+
+Route::get('/notification', function () {
+    return view('notification')->name('notification');
+});

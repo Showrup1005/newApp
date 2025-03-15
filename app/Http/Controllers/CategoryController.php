@@ -22,7 +22,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        $users = \App\Models\User::all();
+        return view('category.create', compact('users'));
     }
 
     /**
@@ -33,12 +34,14 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'status' => 'nullable'
+            'status' => 'nullable',
+            'user_id' => 'required|exists:users,id',
         ]);
         $categories = DB::table('categories')->insert([
             'name' => $request->name,
             'description' => $request->description,
-            'status' => $request->status == true ? 1 : 0
+            'status' => $request->status == true ? 1 : 0,
+            'user_id' => $request->user_id
         ]);
         return redirect()->route('category.index')->with('msg', 'Category created successfully');
     }
@@ -56,8 +59,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-
-        return view('category.edit')->with('category', $category);
+        $users = \App\Models\User::all();
+        return view('category.edit')->with('category', $category)->with('users', $users);
     }
 
     /**
@@ -68,12 +71,14 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'status' => 'nullable'
+            'status' => 'nullable',
+            'user_id' => 'required|exists:users,id'
         ]);
         $categories = DB::table('categories')->where('id', $category->id)->update([
             'name' => $request->name,
             'description' => $request->description,
-            'status' => $request->status == true ? 1 : 0
+            'status' => $request->status == true ? 1 : 0,
+            'user_id' => $request->user_id
         ]);
         return redirect()->route('category.index')->with('msg', 'Category updated successfully');
     }

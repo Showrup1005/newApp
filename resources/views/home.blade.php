@@ -15,6 +15,18 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    @if(auth()->user()->images)
+                        @php
+                            $images = json_decode(auth()->user()->images, true);
+                        @endphp
+                        <div class="d-flex flex-wrap">
+                            @foreach($images as $image)
+                                <div class="m-2">
+                                    <img src="{{ asset('images/' . $image) }}" alt="Uploaded Image" width="100">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -25,6 +25,7 @@
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Status</th>
+                                <th>User ID</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                     <td>{{$category->name}}</td>
                                     <td>{{$category->description}}</td>
                                     <td>{{$category->status == true ? 1:0}}</td>
+                                    <td>{{$category->user_id}}</td>
                                     <td>
                                         <a href="{{route('category.edit', $category->id)}}" class="btn btn-success">Edit</a>
                                         <a href="{{route('category.show', $category->id)}}" class="btn btn-info">Show</a>

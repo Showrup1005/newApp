@@ -35,6 +35,21 @@
                             @enderror
                         </div>
                         <div class="mb-5">
+                            <label for="user_id">User: </label>
+                            <select name="user_id" id="user_id" class="form-control">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" {{ $category->user_id == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('user_id')
+                                <span class="text-danger">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-5">
                             <label for="status">Status: </label>
                             <input type="checkbox" name="status" id="" value="{{$category->status}} == 1 ? 'checked':''">
                         </div>

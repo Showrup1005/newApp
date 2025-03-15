@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -37,6 +37,20 @@
                                     </span>
                                 @enderror
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="images" class="form-label"><strong>Upload Images:</strong></label>
+                            <input 
+                                type="file" 
+                                name="images[]" 
+                                class="form-control @error('images') is-invalid @enderror" 
+                                id="images"
+                                accept="image/*" 
+                                multiple> <!-- Allow multiple files -->
+                            @error('images')
+                                <div class="form-text text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="row mb-3">
